@@ -34,7 +34,20 @@ export function SignIn() {
                     />
                     <Input placeholder="Senha" secureTextEntry/>
 
-                    <Button title="Acessar" isLoading/>
+                    <Button title="Acessar" />
+                </Center>
+
+                <Center mt="$4">
+                    <Text 
+                    color="$trueGray100" 
+                    fontSize="$sm"
+                    mb="$3" 
+                    fontFamily="$body"
+                    >
+                        Ainda não tem acesso?
+                    </Text>
+                    
+                    <Button title="Criar Conta" variant="outline"/>
                 </Center>
 
             </Center>
