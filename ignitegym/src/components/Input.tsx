@@ -23,14 +23,19 @@ export function Input({
   const invalid = !!errorMessage || isInvalid;
 
   return (
-    <FormControl isInvalid={invalid} w="$full" mb="$4">
+    <FormControl isInvalid={invalid} w="$80" mb="$4">
       <GlueStackInput
+        isInvalid={isInvalid}
         h="$14"
         borderWidth="$0"
         borderRadius="$md"
         $focus={{
           borderWidth: 1,
-          borderColor: "$green500",
+          borderColor: invalid ? "$red500" : "$green500",
+        }}
+        $invalid={{
+          borderWidth: 1,
+          borderColor: "$red500",
         }}
         isReadOnly={isReadOnly}
         opacity={isReadOnly ? 0.5 : 1}
