@@ -34,7 +34,7 @@ const signUpSchema = yup.object({
     .min(6, "A senha deve ter pelo menos 6 digitos."),
   password_confirm: yup
     .string()
-    .oneOf([yup.ref("password")], "As senhas não coincidem.")
+    .oneOf([yup.ref("password"), ""], "As senhas não coincidem.")
     .required("Confirme a senha."),
 });
 
