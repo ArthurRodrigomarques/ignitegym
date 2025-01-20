@@ -21,6 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { api } from "@services/api";
 import { AppError } from "@utils/AppError";
+import { Alert } from "react-native";
 
 type FormDataProps = {
   name: string;
@@ -65,15 +66,10 @@ export function SignUp() {
       console.log(response.data);
     } catch (error) {
       const isAppError = error instanceof AppError;
-      // const title = isAppError
-      //   ? error.message
-      //   : "Não foi possivel criar a conta. Tente novamente mais tarde";
-
-      // toast.show({
-      //   title,
-      //   placement: "top",
-      //   bgColor: "red.500",
-      // });
+      const title = isAppError
+        ? error.message
+        : "Não foi possivel criar a conta. Tente novamente mais tarde";
+      Alert.alert(title);
     }
   }
 
