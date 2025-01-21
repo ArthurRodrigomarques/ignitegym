@@ -8,6 +8,7 @@ import {
   ScrollView,
   useToast,
 } from "@gluestack-ui/themed";
+import { useState } from "react";
 
 import { useAuth } from "@hooks/useAuth";
 
@@ -28,6 +29,8 @@ type FormData = {
 };
 
 export function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { signIn } = useAuth();
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
@@ -46,12 +49,15 @@ export function SignIn() {
 
   async function handleSignIn({ email, password }: FormData) {
     try {
+      setIsLoading(true);
       await signIn(email, password);
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
         : "Não foi possivel entrar. Tente novamente mais tarde";
+
+      setIsLoading(false);
       Alert.alert(title);
     }
   }
@@ -113,9 +119,12 @@ export function SignIn() {
                 )}
               />
 
-              <Button title="Acessar" onPress={handleSubmit(handleSignIn)} />
+              <Button
+                title="Acessar"
+                onPress={handleSubmit(handleSignIn)}
+                isLoading={isLoading}
+              />
             </Center>
-
             <Center mt="$4">
               <Text
                 color="$trueGray100"

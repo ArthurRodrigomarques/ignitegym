@@ -8,18 +8,22 @@ import { useAuth } from "@hooks/useAuth";
 
 import { gluestackUIConfig } from "../../config/gluestack-ui.config";
 import { Box } from "@gluestack-ui/themed";
+import { Loading } from "@components/Loading";
 
 export function Routes() {
-  const { user } = useAuth();
-  console.log("USUARIO LOGADO => ", user);
+  const { user, isLoadingUserStorageData } = useAuth();
 
   const theme = DefaultTheme;
   theme.colors.background = gluestackUIConfig.tokens.colors.trueGray700;
 
+  if (isLoadingUserStorageData) {
+    return <Loading />;
+  }
+
   return (
     <Box flex={1} bg="$trueGray700">
       <NavigationContainer theme={theme}>
-        <AuthRoutes />
+        {user.id ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>
     </Box>
   );
